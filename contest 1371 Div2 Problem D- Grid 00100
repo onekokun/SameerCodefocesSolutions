@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class solution
+{
+	
+	public static void main(String[] args)
+	{
+
+		Scanner scan = new Scanner(System.in);
+		int t = scan.nextInt();
+		
+		
+		
+		for(int z=0;z<t;++z)
+		{	
+			int n = scan.nextInt();
+			int k = scan.nextInt();
+			int[] sumr = new int[n];
+			int[] sumc = new int[n];
+			int[][] arr = new int[n][n];
+			int i=0,j=0,countj=0,cj=0;
+			while(k>0)
+			{	
+				
+				if(cj%n==0 && countj!=0)
+				{	cj=0;
+					countj++;
+					j = (countj)%n;
+				}
+				/*System.out.println(i%n+" "+j);*/
+				arr[i%n][j%n] = 1;
+				i++;
+				j++;
+				countj++;
+				cj++;
+				k--;
+			}
+			
+			int a,b,index=0,sum1,sum2;
+			
+			for(a=0;a<n;++a)
+			{	sum1=0;
+				sum2=0;
+				for(b=0;b<n;++b)
+				{
+					sum2+=arr[b][a];
+					sum1+=arr[a][b];
+				}
+				sumr[index]=sum1;
+				sumc[index]=sum2;
+				index++;
+			}
+			
+			Arrays.sort(sumr);
+			Arrays.sort(sumc);
+			
+			int answer = (int) (Math.pow(sumr[0]-sumr[n-1],2)+Math.pow(sumc[0]-sumc[n-1],2));
+			System.out.println(answer);
+			for(int l=0;l<n;++l)
+			{
+				for(int m=0;m<n;++m)
+					System.out.print(arr[l][m]);
+				System.out.println();
+			}
+		}
+		
+	}
+}
